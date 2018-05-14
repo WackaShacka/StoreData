@@ -1,11 +1,14 @@
 var express = require('express');
-var router = express.Router();
-
 var bodyParser = require('body-parser');
 var path = require('path');
+var multer = require('multer');
+bar cookieParser = require('cookie-parser');
+
+var router = express.Router();
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(cookieParser());
 
 /* Post home page. */
 router.post('/storeData', function(req, res, next) {
