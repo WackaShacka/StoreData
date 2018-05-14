@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var multer = require('multer');
-bar cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser');
 
 var router = express.Router();
 
