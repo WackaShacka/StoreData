@@ -1,7 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var path = require('path');
 var multer = require('multer');
+var path = require('path');
+var upload = multer();
 var cookieParser = require('cookie-parser');
 
 var router = express.Router();
@@ -9,6 +10,7 @@ var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(cookieParser());
+router.use(upload.array());
 
 /* Post home page. */
 router.post('/storeData', function(req, res, next) {
