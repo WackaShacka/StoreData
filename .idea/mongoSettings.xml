@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="authenticationDatabase" value="heroku_p9s548dk" />
+          <option name="authenticationMechanism" value="SCRAM-SHA-1" />
+          <option name="label" value="Mongodb Project 2" />
+          <option name="password" value="WaDDaW1nGW1nG" />
+          <option name="serverUrls">
+            <list>
+              <option value="ds231360.mlab.com:31360" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="heroku_p9s548dk" />
+          <option name="username" value="heroku_p9s548dk" />
+        </ServerConfiguration>
+      </list>
+    </option>
+  </component>
+</project>
