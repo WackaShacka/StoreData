@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
-var mongoURI = process.env.MONGODB_URI || 'mongodb://heroku_p9s548dk:WaDDaW1nGW1nG@ds231360.mlab.com:31360/heroku_p9s548dk';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://WilliamA:WaDDaW1nGW1nG@ds231360.mlab.com:31360/heroku_p9s548dk';
 
 // var mongoURI = process.env.MONGODB_URI || 'mongodb://Your_user_id:Your_password@YourHost.mlab.com:YourPort/Your_DB_Name';
 // mongodb://<dbuser>:<dbpassword>@ds231360.mlab.com:31360/heroku_p9s548dk
@@ -12,8 +12,6 @@ var querystring = require('querystring');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-
-
 module.exports.storeData = function (req, res, next)
 {
     mongodb.MongoClient.connect(mongoURI, function(err, db)
@@ -21,7 +19,7 @@ module.exports.storeData = function (req, res, next)
         if(err)
             throw err;
 
-        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+/*      var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         var orderID = Math.floor((Math.random() * 1000000000000) + 1);
@@ -92,7 +90,7 @@ module.exports.storeData = function (req, res, next)
             if(err)
                 throw err;
         });
-
+*/
 
         db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result) {
             if(err)

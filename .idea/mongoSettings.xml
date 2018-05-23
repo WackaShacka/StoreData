@@ -17,9 +17,10 @@
             <SshTunnelingConfiguration />
           </option>
           <option name="userDatabase" value="heroku_p9s548dk" />
-          <option name="username" value="heroku_p9s548dk" />
+          <option name="username" value="WilliamA" />
         </ServerConfiguration>
       </list>
     </option>
+    <option name="shellPath" value="C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe" />
   </component>
 </project>
