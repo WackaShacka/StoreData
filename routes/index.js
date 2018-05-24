@@ -18,5 +18,6 @@ router.use(upload.array());
 
 /* Post home page. */
 router.post('/storeData', controllerMongoCollection.storeData);
+router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
 module.exports = router;

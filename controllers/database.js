@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
-var mongoURI = process.env.MONGODB_URI || 'mongodb://WilliamA:WaDDaW1nGW1nG@ds231360.mlab.com:31360/heroku_p9s548dk';
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://WilliamA:WaDDaW1nGW1nG@ds231360.mlab.com:31360/heroku_p9s548dk';
 
 // var mongoURI = process.env.MONGODB_URI || 'mongodb://Your_user_id:Your_password@YourHost.mlab.com:YourPort/Your_DB_Name';
 // mongodb://<dbuser>:<dbpassword>@ds231360.mlab.com:31360/heroku_p9s548dk
@@ -18,7 +18,7 @@ router.use(upload.array());
 
 module.exports.storeData = function (req, res, next)
 {
-    mongodb.MongoClient.connect(mongoURI, function(err, db)
+    mongodb.MongoClient.connect(mongoDBURI, function(err, db)
     {
         if(err)
             throw err;
@@ -41,7 +41,8 @@ module.exports.storeData = function (req, res, next)
             EMAIL: shipment_info['email']
         };
 
-        CUSTOMERS.insertOne(customerdata, function (err, result) {
+        CUSTOMERS.insertOne(customerdata, function (err, result)
+        {
            if(err)
                throw err;
         });
@@ -57,7 +58,8 @@ module.exports.storeData = function (req, res, next)
             CREDITCARDSECURITYNUM: shipment_info['securitynumber']
         };
 
-        BILLING.insertOne(billing, function (err, result) {
+        BILLING.insertOne(billing, function (err, result)
+        {
             if(err)
                 throw err;
         });
@@ -73,7 +75,8 @@ module.exports.storeData = function (req, res, next)
             SHIPPING_ZIP: shipment_info['shipzip']
         };
 
-        SHIPPING.insertOne(shipping, function (err, result) {
+        SHIPPING.insertOne(shipping, function (err, result)
+        {
             if(err)
                 throw err;
         });
@@ -90,12 +93,14 @@ module.exports.storeData = function (req, res, next)
             ORDER_TOTAL: shipment_info['ordertotal']
         };
 
-        ORDERS.insertOne(orderdata, function (err, result) {
+        ORDERS.insertOne(orderdata, function (err, result)
+        {
             if(err)
                 throw err;
         });
 
-        db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result) {
+        db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result)
+        {
             if(err)
                 throw err;
 
@@ -109,4 +114,29 @@ module.exports.storeData = function (req, res, next)
         });
 
     });
+};
+
+
+
+module.exports.getAllOrders = function(request, response)
+{
+    mongodb.MongoClient.connect(mongoDBURI, function(err, db)
+    {
+        if(err)
+            throw err;
+
+        db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result)
+        {
+            if(err)
+                throw err;
+
+            response.render('getAllOrders', {results: result});
+        });
+
+        db.close(function (err)
+        {
+            if(err)
+                throw err;
+        });
+    })
 };
