@@ -17,6 +17,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(upload.array());
 
 /* Post home page. */
-router.get('/storeData', controllerMongoCollection.storeData);
+router.post('/storeData', controllerMongoCollection.storeData);
 
 module.exports = router;

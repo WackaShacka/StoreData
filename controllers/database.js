@@ -22,7 +22,7 @@ module.exports.storeData = function (req, res, next)
     {
         if(err)
             throw err;
-/*
+
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
@@ -94,12 +94,12 @@ module.exports.storeData = function (req, res, next)
             if(err)
                 throw err;
         });
-*/
+
         db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result) {
             if(err)
                 throw err;
 
-            res.render('../views/storeData', {results: result});
+            res.render('storeData', {results: result});
         });
 
         db.close(function (err)
