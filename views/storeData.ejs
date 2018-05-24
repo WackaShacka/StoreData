@@ -10,6 +10,7 @@
 
     <ul>
         <% result.forEach(function(r) { %>
+
         <li>ORDER: <%= r._id %></li>
         <ul>
             <li>Customer ID: <%=r.CUSTOMER_ID %></li>
@@ -18,6 +19,17 @@
             <li>DATE: <%=r.DATE %></li>
             <li>Product_Vector: <%=r.PRODUCT_VECTOR %></li>
             <li>Total:<%=r.ORDER_TOTAL %></li>
+        </ul>
+        <br/>
+        <li>Customer: <%= r._id %></li>
+        <ul>
+            <li>First Name: <%=r.FIRSTNAME %></li>
+            <li>Last Name: <%=r.LASTNAME %></li>
+            <li>Street: <%=r.STREET %></li>
+            <li>City: <%=r.CITY %></li>
+            <li>State: <%=r.STATE %></li>
+            <li>ZIP: <%=r.ZIP %></li>
+            <li>Email: <%=r.EMAIL %></li>
         </ul>
         <br/>
         <li>Shipping: <%= r.SHIPPING_ID %></li>
@@ -36,17 +48,6 @@
             <li>Credit Card Number: <%=r.CREDITCARDNUM %></li>
             <li>Credit Card Expiration: <%=r.CREDITCARDEXP %></li>
             <li>Credit Card Security Number: <%=r.CREDITCARDSECURITYNUM %></li>
-        </ul>
-        <br/>
-        <li>Customer: <%= r._id %></li>
-        <ul>
-            <li>First Name: <%=r.FIRSTNAME %></li>
-            <li>Last Name: <%=r.LASTNAME %></li>
-            <li>Street: <%=r.STREET %></li>
-            <li>City: <%=r.CITY %></li>
-            <li>State: <%=r.STATE %></li>
-            <li>ZIP: <%=r.ZIP %></li>
-            <li>Email: <%=r.EMAIL %></li>
         </ul>
         <br/>
         <% }); %>
