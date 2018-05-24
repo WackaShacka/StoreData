@@ -9,8 +9,12 @@ var mongoURI = process.env.MONGODB_URI || 'mongodb://WilliamA:WaDDaW1nGW1nG@ds23
 var bodyParser = require('body-parser');
 var path = require('path');
 var querystring = require('querystring');
+var multer = require('multer');
+var upload = multer();
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(upload.array());
 
 module.exports.storeData = function (req, res, next)
 {
@@ -18,8 +22,8 @@ module.exports.storeData = function (req, res, next)
     {
         if(err)
             throw err;
-
-/*      var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+/*
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         var orderID = Math.floor((Math.random() * 1000000000000) + 1);
@@ -91,32 +95,12 @@ module.exports.storeData = function (req, res, next)
                 throw err;
         });
 */
-
         db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result) {
             if(err)
                 throw err;
 
-            res.render('storeData', {results: result});
+            res.render('../views/storeData', {results: result});
         });
-
-        /*
-            var theDatabase = client.db('dbName');
-            var Orders = theDatabase.collection('Orders');
-            var c = Orders.find({});
-
-            c.forEach(function(myDoc)
-            {
-                console.log( "name: " + myDoc.name );
-            });
-
-            Orders.find().toArray(function(err, docs)
-            {
-                if(err)
-                    throw err;
-
-                response.render('storeData', {results: docs});
-            });
-         */
 
         db.close(function (err)
         {

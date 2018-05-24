@@ -9,40 +9,14 @@ var controllerMongoCollection = require('../controllers/database');
 var bodyParser = require('body-parser');
 var path = require('path');
 var querystring = require('querystring');
+var multer = require('multer');
+var upload = multer();
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(upload.array());
 
 /* Post home page. */
-router.post('/storeData', controllerMongoCollection.storeData);
-
-/*
-router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
-router.get('/mongodb', function(request, response) {
-    mongodb.MongoClient.connect(mongoDBURI, function(err, client)
-    {
-        if(err)
-            throw err;
-
-        var theDatabase = client.db('Your_DB_Name');
-
-        var Routes = db.collection('Routes');
-
-        Routes.find({ }).sort({ name: 1 }).toArray(function (err, docs)
-        {
-            if(err)
-                throw err;
-
-            response.render('pages/mongodb', {results: docs});
-        });
-
-        db.close(function (err)
-        {
-            if(err)
-                throw err;
-        });
-
-    });
-});
-*/
+router.get('/storeData', controllerMongoCollection.storeData);
 
 module.exports = router;
