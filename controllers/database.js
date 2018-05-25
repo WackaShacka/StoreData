@@ -29,6 +29,8 @@ module.exports.storeData = function (req, res, next)
 
         var Database = client.db('heroku_p9s548dk');
 
+        var shipment_info = req.body;
+
         var CUSTOMERS = Database.collection('CUSTOMERS');
         var customerdata = {
             _id: customerID,
@@ -70,7 +72,7 @@ module.exports.storeData = function (req, res, next)
         var shipping = {
             _id: shippingID,
             CUSTOMER_ID: customerID,
-            SHIPPING_STREET: shipping_info['Shipstreet'],
+            SHIPPING_STREET: shipment_info['Shipstreet'],
             SHIPPING_CITY: shipment_info['shipcity'],
             SHIPPING_STATE: shipment_info['shipstate'],
             SHIPPING_ZIP: shipment_info['shipzip']
