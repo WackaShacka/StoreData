@@ -26,7 +26,6 @@ module.exports.storeData = function (req, res, next)
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
-        var orderID = Math.floor((Math.random() * 1000000000000) + 1);
 
         var CUSTOMERS = db.collection('CUSTOMERS');
         var customerdata = {
@@ -84,7 +83,6 @@ module.exports.storeData = function (req, res, next)
 
         var ORDERS = db.collection('ORDERS');
         var orderdata = {
-            _id: orderID,
             CUSTOMER_ID: customerID,
             BILLING_ID: billingID,
             SHIPPING_ID: shippingID,
@@ -125,7 +123,9 @@ module.exports.getAllOrders = function(request, response)
         if(err)
             throw err;
 
-        db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result)
+        var Order = db.collection('ORDERS');
+
+        Order.collection("ORDERS").find({}).toArray(function(err, result)
         {
             if(err)
                 throw err;
