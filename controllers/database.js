@@ -125,7 +125,7 @@ module.exports.getAllOrders = function(request, response)
 
         var Order = db.collection('ORDERS');
 
-        Order.collection("ORDERS").find({}).toArray(function(err, result)
+        Order.find({}).toArray(function(err, result)
         {
             if(err)
                 throw err;
