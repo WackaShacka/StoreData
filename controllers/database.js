@@ -97,12 +97,14 @@ module.exports.storeData = function (req, res, next)
                 throw err;
         });
 
-        db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS").find({}).toArray(function(err, result)
+        var Read =  db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS");
+
+        Read.find({}).toArray(function(err, result)
         {
             if(err)
                 throw err;
 
-            res.render('storeData', {results: result});
+            res.render('views/storeData', {results: result});
         });
 
         db.close(function (err)
@@ -125,12 +127,12 @@ module.exports.getAllOrders = function(request, response)
 
         var Order = db.collection('ORDERS');
 
-        Order.find({}).toArray(function(err, result)
+        Order.find({ }).toArray(function(err, docs)
         {
             if(err)
                 throw err;
 
-            response.render('getAllOrders', {results: result});
+            response.render('views/getAllOrders', {results: docs});
         });
 
         db.close(function (err)
