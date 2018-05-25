@@ -18,7 +18,7 @@ router.use(upload.array());
 
 module.exports.storeData = function (req, res, next)
 {
-    mongodb.MongoClient.connect(mongoDBURI, function(err, db)
+    mongodb.MongoClient.connect(mongoDBURI, function(err, client)
     {
         if(err)
             throw err;
@@ -27,7 +27,10 @@ module.exports.storeData = function (req, res, next)
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
 
-        var CUSTOMERS = db.collection('CUSTOMERS');
+        var Database = client.db('heroku_p9s548dk');
+
+
+        var CUSTOMERS = Database.collection('CUSTOMERS');
         var customerdata = {
             _id: customerID,
             FIRSTNAME: shipment_info['fname'],
@@ -47,7 +50,7 @@ module.exports.storeData = function (req, res, next)
         });
 
 
-        var BILLING = db.collection('BILLING');
+        var BILLING = Database.collection('BILLING');
         var billing = {
             _id: billingID,
             CUSTOMER_ID: customerID,
@@ -64,7 +67,7 @@ module.exports.storeData = function (req, res, next)
         });
 
 
-        var SHIPPING = db.collection('SHIPPING');
+        var SHIPPING = Database.collection('SHIPPING');
         var shipping = {
             _id: shippingID,
             CUSTOMER_ID: customerID,
@@ -81,7 +84,7 @@ module.exports.storeData = function (req, res, next)
         });
 
 
-        var ORDERS = db.collection('ORDERS');
+        var ORDERS = Database.collection('ORDERS');
         var orderdata = {
             CUSTOMER_ID: customerID,
             BILLING_ID: billingID,
@@ -97,9 +100,9 @@ module.exports.storeData = function (req, res, next)
                 throw err;
         });
 
-        var Read =  db.collection("CUSTOMERS","BILLING","SHIPPING","ORDERS");
+        var Read = Database.collection('CUSTOMERS','BILLING','SHIPPING','ORDERS');
 
-        Read.find({}).toArray(function(err, result)
+        Read.find({ }).toArray(function(err, result)
         {
             if(err)
                 throw err;
@@ -107,7 +110,7 @@ module.exports.storeData = function (req, res, next)
             res.render('views/storeData', {results: result});
         });
 
-        db.close(function (err)
+        client.close(function (err)
         {
             if(err)
                 throw err;
@@ -120,12 +123,14 @@ module.exports.storeData = function (req, res, next)
 
 module.exports.getAllOrders = function(request, response)
 {
-    mongodb.MongoClient.connect(mongoDBURI, function(err, db)
+    mongodb.MongoClient.connect(mongoDBURI, function(err, client)
     {
         if(err)
             throw err;
 
-        var Order = db.collection('ORDERS');
+        var Database = client.db('heroku_p9s548dk')
+
+        var Order = Database.db('ORDERS');
 
         Order.find({ }).toArray(function(err, docs)
         {
@@ -135,7 +140,7 @@ module.exports.getAllOrders = function(request, response)
             response.render('views/getAllOrders', {results: docs});
         });
 
-        db.close(function (err)
+        client.close(function (err)
         {
             if(err)
                 throw err;

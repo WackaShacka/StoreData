@@ -3,7 +3,6 @@ var router = express.Router();
 var mongodb = require('mongodb');
 var mongoURI = process.env.MONGODB_URI || 'mongodb://WilliamA:WaDDaW1nGW1nG@ds231360.mlab.com:31360/heroku_p9s548dk';
 
-var controllerMain = require('../controllers/main');
 var controllerMongoCollection = require('../controllers/database');
 
 var bodyParser = require('body-parser');
